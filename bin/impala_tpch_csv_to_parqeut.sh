@@ -1,0 +1,16 @@
+create table nation like csv_tpch1t_impala.nation STORED AS parquet;
+insert into  nation select * from csv_tpch1t_impala.nation;
+create table region like csv_tpch1t_impala.region STORED AS parquet;
+insert into  region select * from csv_tpch1t_impala.region;
+create table part like csv_tpch1t_impala.part STORED AS parquet;
+insert into  part select * from csv_tpch1t_impala.part;
+create table supplier like csv_tpch1t_impala.supplier STORED AS parquet;
+insert into  supplier select * from csv_tpch1t_impala.supplier;
+create table partsupp like csv_tpch1t_impala.partsupp STORED AS parquet;
+insert into  partsupp select * from csv_tpch1t_impala.partsupp;
+create table customer like csv_tpch1t_impala.customer STORED AS parquet;
+insert into  customer select * from csv_tpch1t_impala.customer;
+create table orders like csv_tpch1t_impala.orders STORED AS parquet;
+insert into  orders select * from csv_tpch1t_impala.orders;
+create table lineitem like csv_tpch1t_impala.lineitem STORED AS parquet;
+insert into  lineitem select * from csv_tpch1t_impala.lineitem;
