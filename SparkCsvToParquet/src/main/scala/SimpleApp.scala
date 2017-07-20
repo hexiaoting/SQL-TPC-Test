@@ -100,6 +100,6 @@ object SimpleApp{
 		val schemaArray=Array(nation_schema, region_schema,part_schema,
 			supplier_schema,partsupp_schema,customer_schema,orders_schema,lineitem_schema)
 		for (i <- 0 until tableArray.length)
-			convert(spark,args(0)+tableArray(i),schemaArray(i),tableArray(i), args(1));
+			convert(spark,args(0)+"/"+tableArray(i),schemaArray(i),tableArray(i), args(1));
 	}
 }
