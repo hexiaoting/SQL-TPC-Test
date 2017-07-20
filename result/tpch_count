@@ -1,0 +1,23 @@
+1T data:
+TableName	RowCount		InsertTime
+nation:		25
+region:		5
+supplier:	10000000		13.47s
+part:		200000000		139.13s
+partsupp:	800000000		273.56s
+orders:		1500000000		570.04s
+customer:	150000000		84.44s
+lineitem:	5999989709		2910.90s
+
+
+
+100G data:
+TableName	RowCount		InsertTime		CSVSize
+nation:		25								4.0K
+region:		5								4.0K
+supplier:		13.47s			137MB
+part:			139.13s			2.3G
+partsupp:		273.56s			12G
+orders:			570.04s			17G
+customer:		84.44s			2.3G
+lineitem:	600037902		2910.90s		75G

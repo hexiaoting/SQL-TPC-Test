@@ -12,13 +12,28 @@ while [ -h "$SOURCE" ]; do
   SOURCE="$(readlink "$SOURCE")"
   [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE"
 done
+export IMPALA_HOME="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )/install/"
+
+DIRECTORY=$IMPALA_HOME/conf
+if [ "`ls -A $DIRECTORY`" = "" ] && [ -z $HADOOP_CONF_DIR ]
+then
+    echo "Please set HADOOP_CONF_DIR"
+    exit
+fi
+
+if [ "`ls -A $DIRECTORY`" = ""  ]
+then
+  cp $HADOOP_CONF_DIR/core-site.xml ${IMPALA_HOME}/conf/
+  cp $HADOOP_CONF_DIR/hdfs-site.xml ${IMPALA_HOME}/conf/
+fi
+
 LIB_JAVA=`find ${JAVA_HOME}/   -name libjava.so | head -1`
 LIB_JSIG=`find ${JAVA_HOME}/   -name libjsig.so | head -1`
 LIB_JVM=` find ${JAVA_HOME}/   -name libjvm.so  | head -1`
-LIB_HDFS=`find ${HADOOP_HOME}/ -name libhdfs.so | head -1`
+#LIB_HDFS=`find ${HADOOP_HOME}/ -name libhdfs.so | head -1`
 LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:`dirname ${LIB_JAVA}`:`dirname ${LIB_JSIG}`"
-LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:`dirname ${LIB_JVM}`:`dirname ${LIB_HDFS}`"
-export IMPALA_HOME="$( cd -P "$( dirname "$SOURCE" )/.." && pwd )/install/"
+LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:`dirname ${LIB_JVM}`"
+#LD_LIBRARY_PATH="${LD_LIBRARY_PATH}:`dirname ${LIB_JVM}`:`dirname ${LIB_HDFS}`"
 export LD_LIBRARY_PATH=${IMPALA_HOME}/lib:$LD_LIBRARY_PATH
 
 CONF_DIR=${IMPALA_HOME}/conf
